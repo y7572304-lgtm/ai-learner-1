@@ -9,6 +9,15 @@ const VoiceAssistant = () => {
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
 
+  // 励志句子数组
+  const inspirationalSentences = [
+    '每一次努力都是向梦想迈进的一步！',
+    '坚持不懈，你将创造奇迹！',
+    '相信自己，你比想象中更强大！',
+    '今天的小进步，明天的大成功！',
+    '勇敢追梦，世界因你而不同！',
+  ];
+
   // 语音助手功能仅在启用时显示
   if (!voiceSettings.enableVoiceAssistant) {
     return null;
@@ -46,11 +55,11 @@ const VoiceAssistant = () => {
     }
   }, []);
 
-  // 预定义句子输出函数
+  // 随机输出励志句子
   const sayPredefinedSentence = () => {
-    const sentence = '您好，我听到了您的声音！';
-    console.log(sentence); // 在控制台输出预定义句子
-    // 可选：使用 SpeechSynthesis API 读出句子
+    const sentence = inspirationalSentences[Math.floor(Math.random() * inspirationalSentences.length)];
+    console.log(sentence); // 在控制台输出随机励志句子
+    // 使用 SpeechSynthesis API 读出句子
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(sentence);
       utterance.lang = 'zh-CN';
